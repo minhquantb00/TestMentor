@@ -19,6 +19,18 @@ using TestMentor.Infrastructure.ImplementRepository;
 using TestMentor.Application.UseCases.User_UseCase.AuthenticateUser;
 using TestMentor.Application.UseCases.User_UseCase.GetUserById;
 using TestMentor.Application.UseCases.User_UseCase.DataUser;
+using TestMentor.Application.UseCases.Course_UseCase.CreateCourse;
+using TestMentor.Application.UseCases.Course_UseCase.DataCourse;
+using TestMentor.Application.UseCases.Course_UseCase.GetCourse;
+using TestMentor.Application.UseCases.Course_UseCase.GetCourseByUserId;
+using TestMentor.Application.UseCases.Course_UseCase.DeleteCourse;
+using TestMentor.Application.UseCases.Course_UseCase.GetCouseById;
+using TestMentor.Application.UseCases.Course_UseCase.UpdateCourse;
+using TestMentor.Application.UseCases.Chapter_UseCase.CreateChapter;
+using TestMentor.Application.UseCases.Chapter_UseCase.DataChapter;
+using TestMentor.Application.UseCases.Lesson_UseCase.DataLesson;
+using TestMentor.Application.UseCases.Lesson_UseCase.CreateLesson;
+using TestMentor.Application.UseCases.Chapter_UseCase.GetChapterById;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +54,15 @@ builder.Services.AddScoped<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCas
 builder.Services.AddScoped<IUseCase<LoginUserUseCaseInput, LoginUserUseCaseOutput>, LoginUserUseCase>();
 builder.Services.AddScoped<IUseCase<AuthenticateUserUseCaseInput, AuthenticateUserUseCaseOutput>, AuthenticateUserUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<int, GetUserByIdUseCaseOutput>, GetUserByIdUseCase>();
+builder.Services.AddScoped<IUseCase<CreateCourseUseCaseInput, CreateCourseUseCaseOuput>, CreateCourseUseCase>();
+builder.Services.AddScoped<IUseCase<GetCourseUseCaseInput, GetCourseUseCaseOutput>, GetCourseUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<int, GetCourseByUserIdUseCaseOutput>, GetCourseByUserIdUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<int, DeleteCourseUseCaseOutput>, DeleteCourseUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<int, GetCourseByIdUseCaseOutput>, GetCourseByIdUseCase>();
+builder.Services.AddScoped<IUseCase<UpdateCourseUseCaseInput, UpdateCourseUseCaseOutput>, UpdateCourseUseCase>();
+builder.Services.AddScoped<IUseCase<CreateChapterUseCaseInput, CreateChapterUseCaseOutput>, CreaterChapterUseCase>();
+builder.Services.AddScoped<IUseCase<CreateLessonUseCaseInput, CreateLessonUseCaseOutput>, CreateLessonUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<int, GetChapterByIdUseCaseOutput>, GetChapterByIdUseCase>();
 #endregion
 
 #region Register Repository
@@ -51,6 +72,10 @@ builder.Services.AddScoped<IRepository<Permission>, Repository<Permission>>();
 builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
 builder.Services.AddScoped<IRepository<RefreshToken>, Repository<RefreshToken>>();
 builder.Services.AddScoped<IRepository<ConfirmEmail>, Repository<ConfirmEmail>>();
+builder.Services.AddScoped<IRepository<Course>, Repository<Course>>();
+builder.Services.AddScoped<IRepository<ChapterStudy>, Repository<ChapterStudy>>();
+builder.Services.AddScoped<IRepository<Lesson>, Repository<Lesson>>();
+builder.Services.AddScoped<IRepository<ChapterStudy>, Repository<ChapterStudy>>();
 #endregion
 
 #region Đăng ký service
@@ -60,6 +85,9 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 
 #region Register Mapper
 builder.Services.AddScoped<UserConverter>();
+builder.Services.AddScoped<CourseConverter>();
+builder.Services.AddScoped<ChapterConverter>();
+builder.Services.AddScoped<LessonConverter>();
 #endregion
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>

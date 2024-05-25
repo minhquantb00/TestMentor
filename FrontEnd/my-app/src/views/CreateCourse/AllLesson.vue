@@ -114,10 +114,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in listLessons" :key="item">
-                <td>{{ item.tenBaiHoc }}</td>
-                <td>{{ formatDate(item.thoiGianTao) }}</td>
-                <td>{{ formatDate(item.thoiGianCapNhat) }}</td>
+              <tr v-for="item in listLessons" :key="item.id">
+                <td>{{ item.lessonName }}</td>
+                <td>{{ formatDate(item.createTime) }}</td>
                 <td>{{ item.thoiLuongVideo }}</td>
                 <td class="mt-4">
                   <router-link to="#">
@@ -132,7 +131,7 @@
                       <v-dialog persistent activator="parent" max-width="1000">
                         <template v-slot:default="{ isActive }">
                           <v-card class="pa-5">
-                            <input v-model="khoaHocId" type="hidden" />
+                            <input v-model="courseId" type="hidden" />
                             <label>
                               <span class="obligatory mr-2">*</span>
                               Tên bài học
@@ -140,7 +139,7 @@
                             <v-text-field
                               class="mt-3"
                               :rules="rules"
-                              v-model="tieuDeKhoaHoc"
+                              v-model="title"
                               color="purple-accent-4"
                               variant="outlined"
                               placeholder="Tên bài học"
@@ -150,18 +149,10 @@
                               <span class="obligatory mr-2">*</span>
                               Thời lượng video
                             </label>
-                            <v-text-field
-                              class="mt-3"
-                              :rules="rules"
-                              v-model="phanTramGiamGia"
-                              color="purple-accent-4"
-                              variant="outlined"
-                              placeholder="Thời lượng video"
-                            ></v-text-field>
                             <v-lable class="mb-3">Mô tả</v-lable>
                             <ckeditor
                               :editor="editor"
-                              v-model="moTaKhoaHoc"
+                              v-model="description"
                               :config="editorConfig"
                               aria-placeholder="Mô tả"
                             ></ckeditor>
@@ -235,7 +226,8 @@ export default {
     const id = this.$route.params.id;
     try {
       const res = await this.studyChapter.getStudyChapterById(id);
-      this.listLessons = res.data.baiHocs;
+      console.log(res);
+      this.listLessons = res.dataResponseChapter;
       console.log(this.listLessons);
     } catch (e) {
       console.error("Error Fetching Lessons" + e.message);

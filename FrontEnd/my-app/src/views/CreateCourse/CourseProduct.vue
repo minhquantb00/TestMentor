@@ -35,7 +35,7 @@
                           <v-file-input
                             label="Ảnh khóa học"
                             class="mt-3"
-                            v-model="inputCreateCourse.anhKhoaHoc"
+                            v-model="inputCreateCourse.image"
                             @change="hanldeImageChange"
                           ></v-file-input>
                           <label>
@@ -48,7 +48,7 @@
                             color="purple-accent-4"
                             variant="outlined"
                             placeholder="Tiêu đề khóa học"
-                            v-model="inputCreateCourse.tieuDeKhoaHoc"
+                            v-model="inputCreateCourse.title"
                           ></v-text-field>
                           <label>
                             <span class="obligatory mr-2">*</span>
@@ -60,54 +60,15 @@
                             color="purple-accent-4"
                             variant="outlined"
                             placeholder="Giá khóa học"
-                            v-model="inputCreateCourse.giaKhoaHoc"
+                            v-model="inputCreateCourse.price"
                           ></v-text-field>
-                          <label>
-                            <span class="obligatory mr-2">*</span>
-                            Phần trăm giảm giá
-                          </label>
-                          <v-text-field
-                            class="mt-3"
-                            :rules="requireFieldRule"
-                            color="purple-accent-4"
-                            variant="outlined"
-                            placeholder="Giá khóa học"
-                            v-model="inputCreateCourse.phanTramGiamGia"
-                          ></v-text-field>
-                          <label>
-                            <span class="obligatory mr-2">*</span>
-                            Video giới thiệu khóa học
-                          </label>
-                          <v-text-field
-                            class="mt-3"
-                            :rules="requireFieldRule"
-                            color="purple-accent-4"
-                            variant="outlined"
-                            placeholder="Link url video"
-                            v-model="inputCreateCourse.TrailerKhoaHoc"
-                          ></v-text-field>
-                          <label>
-                            <span class="obligatory mr-2">*</span>
-                            Loại khóa học
-                          </label>
-                          <v-select
-                            class="mt-3"
-                            clearable
-                            v-model="inputCreateCourse.loaiKhoaHocId"
-                            color="purple-accent-4"
-                            label="Loại khóa học"
-                            item-value="id"
-                            item-title="tenLoaiKhoaHoc"
-                            :items="listCourseType"
-                            variant="outlined"
-                          ></v-select>
                           <v-lable class="mb-3">Mô tả</v-lable>
                           <ckeditor
                             :editor="editor"
                             :config="editorConfig"
                             aria-placeholder="Mô tả"
-                            v-model="inputCreateCourse.moTaKhoaHoc"
-                            v-html="inputCreateCourse.moTaKhoaHoc"
+                            v-model="inputCreateCourse.description"
+                            v-html="inputCreateCourse.description"
                           ></ckeditor>
 
                           <v-btn
@@ -178,21 +139,21 @@
                         class=""
                       >
                         <v-card class="mb-5 ma-2" width="275" hover>
-                          <v-img height="200" :src="n.anhKhoaHoc" cover></v-img>
+                          <v-img height="200" :src="n.image" cover></v-img>
 
                           <v-card-title class="text-h5">{{
-                            n.tieuDeKhoaHoc
+                            n.title
                           }}</v-card-title>
 
                           <v-card-subtitle>
                             Ngày tạo:
-                            {{ formatDate(n.ngayTao) }}
+                            {{ formatDate(n.createTime) }}
                           </v-card-subtitle>
                           <v-card-title class="text-p"
-                            >Giá: {{ formatCurrency(n.giaKhoaHocThucTe) }}
+                            >Giá: {{ formatCurrency(n.price) }}
                           </v-card-title>
                           <v-card-title class="text-p"
-                            >Giá gốc: {{ formatCurrency(n.giaKhoaHoc) }}
+                            >Giá gốc: {{ formatCurrency(n.price) }}
                           </v-card-title>
                           <v-card-actions>
                             <v-spacer></v-spacer>
@@ -209,7 +170,7 @@
                               <v-divider></v-divider>
 
                               <div class="text-center mb-6">
-                                <v-btn icon class="mr-3 btn-create" @click="inputCreateStudyChapter.khoaHocId = n.id">
+                                <v-btn icon class="mr-3 btn-create" @click="inputCreateStudyChapter.courseId = n.id">
                                   <font-awesome-icon
                                     icon="fa-solid fa-plus"
                                   ></font-awesome-icon>
@@ -223,7 +184,7 @@
                                         <input
                                         type="hidden"
                                           v-model="
-                                            inputCreateStudyChapter.khoaHocId
+                                            inputCreateStudyChapter.courseId
                                           "
                                           readonly
                                         />
@@ -234,7 +195,7 @@
                                         <v-text-field
                                           class="mt-3"
                                           v-model="
-                                            inputCreateStudyChapter.tenChuong
+                                            inputCreateStudyChapter.name
                                           "
                                           :rules="rules"
                                           color="purple-accent-4"
@@ -248,7 +209,7 @@
                                         </label>
                                         <v-file-input
                                           v-model="
-                                            inputCreateStudyChapter.AnhChuongHoc
+                                            inputCreateStudyChapter.image
                                           "
                                           @change="hanldeImageChange"
                                           class="mt-3"
@@ -321,7 +282,7 @@
                                         <v-text-field
                                           class="mt-3"
                                           :rules="rules"
-                                          v-model="tieuDeKhoaHoc"
+                                          v-model="title"
                                           color="purple-accent-4"
                                           variant="outlined"
                                           placeholder="Tiêu đề khóa học"
@@ -333,38 +294,12 @@
                                         <v-text-field
                                           class="mt-3"
                                           :rules="rules"
-                                          v-model="giaKhoaHoc"
+                                          v-model="price"
                                           color="purple-accent-4"
                                           variant="outlined"
                                           placeholder="Giá khóa học"
                                         ></v-text-field>
-                                        <label>
-                                          <span class="obligatory mr-2">*</span>
-                                          Phần trăm giảm giá
-                                        </label>
-                                        <v-text-field
-                                          class="mt-3"
-                                          :rules="rules"
-                                          v-model="phanTramGiamGia"
-                                          color="purple-accent-4"
-                                          variant="outlined"
-                                          placeholder="Giá khuyến mại khóa học"
-                                        ></v-text-field>
-                                        <label>
-                                          <span class="obligatory mr-2">*</span>
-                                          Loại khóa học
-                                        </label>
-                                        <v-select
-                                          class="mt-3"
-                                          clearable
-                                          v-model="loaiKhoaHocId"
-                                          color="purple-accent-4"
-                                          label="Loại khóa học"
-                                          item-value="id"
-                                          item-title="tenLoaiKhoaHoc"
-                                          :items="listCourseType"
-                                          variant="outlined"
-                                        ></v-select>
+                                        
 
                                         <v-lable class="mb-3">Mô tả</v-lable>
                                         <ckeditor
@@ -743,13 +678,10 @@ export default {
       listCourseType: [],
       listCourseId: [],
       inputCreateCourse: {
-        tieuDeKhoaHoc: "",
-        moTaKhoaHoc: "",
-        giaKhoaHoc: null,
-        phanTramGiamGia: null,
-        anhKhoaHoc: "",
-        loaiKhoaHocId: null,
-        TrailerKhoaHoc: "",
+        title: "",
+        description: "",
+        price: null,
+        image: null,
       },
 
       khoaHocId: this.listCourseId,
@@ -761,9 +693,9 @@ export default {
       // loaiKhoaHocId: this.listCourseId.loaiKhoaHocId,
 
       inputCreateStudyChapter: {
-        tenChuong: "",
-        khoaHocId: null,
-        anhChuongHoc: null,
+        name: "",
+        courseId: null,
+        image: null,
       },
     };
   },
@@ -776,7 +708,8 @@ export default {
       const response = await this.courseApi.getAllCoursesByUserId(id);
       console.log(response);
       console.log("ở dây nhé");
-      this.listCourse = response;
+      const result = response.data
+      this.listCourse = response.dataResponseCourses;
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -798,8 +731,8 @@ export default {
     const userInfo = localStorage.getItem("userInfo");
   },
   methods: {
-    updateKhoaHocId(khoaHocId) {
-      this.inputCreateStudyChapter.khoaHocId = khoaHocId;
+    updateKhoaHocId(courseId) {
+      this.inputCreateStudyChapter.course = courseId;
     },
     hanldeImageChange(event) {
       const file = event.target.files[0];
@@ -821,8 +754,8 @@ export default {
         return;
       }
       this.imageFile = fileName;
-      this.inputCreateCourse.anhKhoaHoc = file;
-      this.inputCreateStudyChapter.anhChuongHoc = file;
+      this.inputCreateCourse.image = file;
+      this.inputCreateStudyChapter.image = file;
     },
     async deleteCoure(khoaHocId) {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -869,13 +802,11 @@ export default {
         }
 
         const params = {
-          khoaHocId: this.inputUpdateCourse.khoaHocId,
-          TieuDeKhoaHoc: this.inputUpdateCourse.tieuDeKhoaHoc,
-          MoTaKhoaHoc: this.inputUpdateCourse.moTaKhoaHoc,
-          GiaKhoaHoc: this.inputUpdateCourse.giaKhoaHoc,
-          PhanTramGiamGia: this.inputUpdateCourse.phanTramGiamGia,
-          AnhKhoaHoc: this.inputUpdateCourse.anhKhoaHoc,
-          LoaiKhoaHocId: this.inputUpdateCourse.loaiKhoaHocId,
+          id: this.inputUpdateCourse.id,
+          title: this.inputUpdateCourse.title,
+          description: this.inputUpdateCourse.description,
+          price: this.inputUpdateCourse.price,
+          image: this.inputUpdateCourse.image,
         };
         const result = await this.courseApi.updateCourse(params);
 
@@ -910,7 +841,7 @@ export default {
       try {
         const result = await this.studyChapter.createStudyChapter(
           this.inputCreateStudyChapter,
-          console.log(this.inputCreateStudyChapter.khoaHocId),
+          console.log(this.inputCreateStudyChapter.courseId),
           (this.loading = true)
         );
         console.log(result);

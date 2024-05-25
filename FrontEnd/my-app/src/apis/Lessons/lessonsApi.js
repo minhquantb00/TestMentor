@@ -1,8 +1,7 @@
-import axios from "axios";
+import axiosIns from "../../plugins/axios";
 import { defineStore } from "pinia";
 
 // Định nghĩa baseURL cho axios
-axios.defaults.baseURL = "https://localhost:7046/api";
 const authorization = localStorage.getItem("accessToken")
   ? localStorage.getItem("accessToken")
   : "";
@@ -10,9 +9,9 @@ export const lessonsApi = defineStore("lessons", {
   actions: {
     createLessons(params) {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .post(
-            "/user/ThemBaiHoc",
+            "/User/CreateLesson",
             { ...params },
             {
               headers: {
@@ -26,7 +25,7 @@ export const lessonsApi = defineStore("lessons", {
     },
     getAllLessons() {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .get("/user/GetAllsBaiHoc")
           .then((res) => {
             if (res.status === 200) {
@@ -41,7 +40,7 @@ export const lessonsApi = defineStore("lessons", {
     },
     getAllCoursesType() {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .get("/user/GetAllLKH")
           .then((res) => {
             if (res.status === 200) {

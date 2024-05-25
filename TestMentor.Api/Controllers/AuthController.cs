@@ -19,6 +19,7 @@ namespace TestMentor.Api.Controllers
             _serviceProvider = serviceProvider;
         }
         [HttpPost]
+        [Consumes(contentType: "multipart/form-data")]
         public async Task<IActionResult> Register([FromForm] RegisterUserUseCaseInput input)
         {
             var useCase = _serviceProvider.GetService<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCaseOutput>>();

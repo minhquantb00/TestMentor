@@ -40,5 +40,10 @@ namespace TestMentor.Domain.EnumeratesConstants
             Mentor = 1,
             Student = 2,
         }
+        public enum LessonStatus
+        {
+            ChuaXong = 0,
+            Xong = 1
+        }
     }
 }

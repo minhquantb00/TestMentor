@@ -17,14 +17,14 @@
                 <v-hover v-slot="{ isHovering, props }">
                   <v-card v-bind="props">
                     <v-img
-                      :src="c.anhChuongHoc"
+                      :src="c.image"
                       height="200px"
                       :aspect-ratio="16 / 9"
                       cover
                     >
                       <v-card-title
                         class="text-white"
-                        v-text="c.tenChuong"
+                        v-text="c.name"
                       ></v-card-title>
                       <v-expand-transition>
                         <div
@@ -48,7 +48,7 @@
                             color="grey-darken-4"
                             variant="tonal"
                             :value="this.id"
-                            @click="inputAddLesson.chuongHocId = c.id"
+                            @click="inputAddLesson.chapterId = c.id"
                           >
                             Thêm bài học</v-btn
                           >
@@ -59,7 +59,7 @@
                             <v-card :title="c.nameCourse" class="pa-5">
                               <input
                               type="hidden"
-                                v-model="inputAddLesson.chuongHocId"
+                                v-model="inputAddLesson.chapterId"
                               />
                               <label>
                                 <span class="obligatory mr-2">*</span>
@@ -68,7 +68,7 @@
                               <v-text-field
                                 class="mt-3"
                                 :rules="rules"
-                                v-model="inputAddLesson.tenBaiHoc"
+                                v-model="inputAddLesson.lessonName"
                                 color="purple-accent-4"
                                 variant="outlined"
                                 placeholder="Tên bài học"
@@ -79,7 +79,7 @@
                               </label>
                               <v-text-field
                                 class="mt-3"
-                                v-model="inputAddLesson.thoiLuongVideo"
+                                v-model="inputAddLesson.videoDuration"
                                 :rules="rules"
                                 color="purple-accent-4"
                                 variant="outlined"
@@ -92,7 +92,7 @@
                               <v-text-field
                                 class="mt-3"
                                 :rules="rules"
-                                v-model="inputAddLesson.videoBaiHoc"
+                                v-model="inputAddLesson.linkVideo"
                                 color="purple-accent-4"
                                 variant="outlined"
                                 placeholder="Nhập url của bài học"
@@ -101,8 +101,8 @@
                               <ckeditor
                                 :editor="editor"
                                 :config="editorConfig"
-                                v-model="inputAddLesson.moTaBaiHoc"
-                                v-html="inputAddLesson.moTaBaiHoc"
+                                v-model="inputAddLesson.description"
+                                v-html="inputAddLesson.description"
                                 aria-placeholder="Mô tả"
                               ></ckeditor>
 
@@ -192,11 +192,11 @@ export default {
       today: new Date(),
       loading: false,
       inputAddLesson: {
-        tenBaiHoc: "",
-        moTaBaiHoc: "",
-        chuongHocId: null,
-        videoBaiHoc: "",
-        thoiLuongVideo: null,
+        lessonName: "",
+        description: "",
+        chapterId: null,
+        linkVideo: "",
+        videoDuration: null,
       },
       cards: [
         {
@@ -219,10 +219,14 @@ export default {
     };
   },
   async mounted() {
+    console.log('vao day chua');
     const id = this.$route.params.id;
     try {
       const res = await this.courseApi.getCourseId(id);
-      this.listCourse = res.data.chuongHocs;
+      console.log(res)
+      const result = res.dataResponseCourse;
+      console.log(result)
+      this.listCourse = result.dataResponseChapters;
       console.log("đây là chương học");
       console.log(this.listCourse);
     } catch (error) {

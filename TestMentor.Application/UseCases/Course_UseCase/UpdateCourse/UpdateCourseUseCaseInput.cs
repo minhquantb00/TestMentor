@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestMentor.Application.UseCases.Course_UseCase.CreateCourse
+namespace TestMentor.Application.UseCases.Course_UseCase.UpdateCourse
 {
-    public class CreateCourseUseCaseInput
+    public class UpdateCourseUseCaseInput
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public int Id { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
         public double Price { get; set; }
         [DataType(DataType.Upload)]
         public IFormFile? Image { get; set; }

@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestMentor.Domain.Entities;
 
-namespace TestMentor.Application.UseCases.Course_UseCase.CreateCourse
+namespace TestMentor.Application.UseCases.Chapter_UseCase.CreateChapter
 {
-    public class CreateCourseUseCaseInput
+    public class CreateChapterUseCaseInput
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
+        public string Name { get; set; }
         [DataType(DataType.Upload)]
         public IFormFile? Image { get; set; }
+        public int CourseId { get; set; }
     }
 }

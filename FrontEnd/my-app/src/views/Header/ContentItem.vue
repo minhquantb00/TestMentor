@@ -62,17 +62,17 @@
                 style="text-decoration: none"
               >
                 <v-card class="mb-5 ma-2" width="283">
-                  <v-img height="200" :src="n.anhKhoaHoc" cover></v-img>
+                  <v-img height="200" :src="n.image" cover></v-img>
 
                   <v-card-title class="text-h5">{{
-                    n.tieuDeKhoaHoc
+                    n.title
                   }}</v-card-title>
 
                   <v-card-subtitle>
-                    {{ processDescription(n.moTaKhoaHoc) }}
+                    {{ processDescription(n.description) }}
                   </v-card-subtitle>
                   <v-card-title class="text-p"
-                    >Giá: {{ formatCurrency(n.giaKhoaHocThucTe) }}
+                    >Giá: {{ formatCurrency(n.price) }}
                     <span
                       style="
                         text-decoration-line: line-through;
@@ -80,7 +80,7 @@
                         color: grey;
                       "
                     >
-                      {{ formatCurrency(n.giaKhoaHoc) }}
+                      {{ formatCurrency(n.price) }}
                     </span>
                   </v-card-title>
                   <v-card-actions>
@@ -144,17 +144,17 @@
                 style="text-decoration: none"
               >
                 <v-card class="mb-5 ma-2" width="283">
-                  <v-img height="200" :src="n.anhKhoaHoc" cover></v-img>
+                  <v-img height="200" :src="n.image" cover></v-img>
 
                   <v-card-title class="text-h5">{{
                     n.tieuDeKhoaHoc
                   }}</v-card-title>
 
                   <v-card-subtitle>
-                    {{ processDescription(n.moTaKhoaHoc) }}
+                    {{ processDescription(n.description) }}
                   </v-card-subtitle>
                   <v-card-title class="text-p"
-                    >Giá: {{ formatCurrency(n.giaKhoaHocThucTe) }}
+                    >Giá: {{ formatCurrency(n.price) }}
                     <span
                       style="
                         text-decoration-line: line-through;
@@ -162,7 +162,7 @@
                         color: grey;
                       "
                     >
-                      {{ formatCurrency(n.giaKhoaHoc) }}
+                      {{ formatCurrency(n.price) }}
                     </span>
                   </v-card-title>
                   <v-card-actions>
@@ -254,6 +254,9 @@ export default {
       apiCourse: courseApi(),
       bannerApi: bannerApi(),
       postApi: postApi(),
+      params: {
+        title: ''
+      },
       loading: true,
       listCourse: [],
       listBanner: [],
@@ -268,8 +271,9 @@ export default {
       this.loading = false;
     }, 2500);
     try {
-      const result = await this.apiCourse.getAllCourses();
-      this.listCourse = result;
+      const valueReturn = await this.apiCourse.searchCourses();
+      const result = valueReturn.data
+      this.listCourse = result.dataResponseCourse;
     } catch (e) {
       console.error("Fetching faild", e);
     }

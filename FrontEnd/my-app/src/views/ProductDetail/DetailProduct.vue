@@ -11,10 +11,10 @@
               <v-title class="pa-2 ma-2">
                 <h1>
                   <!-- gắn tiêu đề vào đaya -->
-                  {{ this.listCourseApi.tieuDeKhoaHoc }}
+                  {{ listCourseApi.title }}
                 </h1>
                 <h5 class="my-4">
-                  Số lượng học viên: {{ this.listCourseApi.soHocVienHocKhoaHoc }}
+                  Số lượng học viên: {{ this.listCourseApi.numberOfSubcribers }}
                   <font-awesome-icon
                     class="mx-1"
                     icon="fa-solid fa-user-group"
@@ -23,11 +23,11 @@
                 <h6>
                   Được tạo bởi:
                   <!-- gắn ngày tạo vào đây -->
-                  {{ this.user }}
+                  {{ listCourseApi.creatorName }}
                 </h6>
                 <p>
                   Ngày cập nhật gần nhất:
-                  {{ formatDate(this.listCourseApi.ngayTao) }}
+                  {{ formatDate(listCourseApi.createTime) }}
                 </p>
 
                 <div class="text-left">
@@ -46,34 +46,29 @@
               id="detail-course"
             >
               <v-card class="mx-auto ma-8 fixed-card" max-width="390">
-                <!-- <v-img
-                    class="align-end text-white"
-                    height="200"
-                    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                    cover
-                  > -->
+                
                 <iframe
                   v-if="listCourseApi.trailerKhoaHoc"
-                  :src="this.listCourseApi.trailerKhoaHoc"
+                  :src="listCourseApi.trailerKhoaHoc"
                   frameborder="0"
                   style="height: 230px; width: 390px"
                 ></iframe>
                 <v-img
                   v-else
-                  :src="this.listCourseApi.anhKhoaHoc"
+                  :src="listCourseApi.image"
                   style="height: 230px; width: 390px"
                   alt=""
                   cover
                 />
                 <v-card-title class="mt-4"
                   ><span style="font-size: 30px">
-                    {{ formatCurrency(this.listCourseApi.giaKhoaHocThucTe) }}
+                    {{ formatCurrency(listCourseApi.price) }}
                   </span>
                   <span
                     style="text-decoration-line: line-through; font-size: 16px; color:grey"
                     class="ma-6"
                   >
-                    {{ formatCurrency(this.listCourseApi.giaKhoaHoc) }}
+                    {{ formatCurrency(listCourseApi.price) }}
                   </span>
                 </v-card-title>
                 <!-- </v-img> -->
@@ -126,7 +121,7 @@
                 <v-card-title>
                   <h6 class="mb-3">Khóa học này bao gồm:</h6>
                   <ul v-for="c in courseContent" :key="c">
-                    <li style="font-size: 14px">{{ c.tenChuong }}</li>
+                    <li style="font-size: 14px">{{ c.name }}</li>
                   </ul>
                 </v-card-title>
                 <!-- </v-card-text> -->
@@ -159,7 +154,7 @@
             <v-row>
               <v-col cols="8">
                 <h3 class="my-4">Mô tả</h3>
-                <v-title v-html="this.listCourseApi.moTaKhoaHoc"> </v-title>
+                <v-title v-html="this.listCourseApi.description"> </v-title>
               </v-col>
             </v-row>
           </div>
@@ -181,7 +176,7 @@
                         @click="handleRouterLinkClick(lc.id)"
                       >
                         <img
-                          :src="lc.anhKhoaHoc"
+                          :src="lc.image"
                           alt=""
                           width="70"
                           height="60"
@@ -194,11 +189,11 @@
                           :to="`/detail-product/${lc.id}`"
                           @click="handleRouterLinkClick(lc.id)"
                           class="name-table"
-                          >{{ lc.tieuDeKhoaHoc }}</router-link
+                          >{{ lc.title }}</router-link
                         >
                       </h6>
                       <h6 class="mx-2" style="color: #003000">
-                        Tổng số {{ lc.tongThoiGianKhoaHoc }} giờ
+                        Tổng số {{ lc.totalDuration }} giờ
                       </h6>
                     </v-col>
                     <v-col cols="2">
@@ -206,11 +201,11 @@
                         icon="fa-solid fa-users"
                       ></font-awesome-icon>
                       <!-- sô học viên  -->
-                      {{lc.soHocVienHocKhoaHoc}}
+                      {{lc.numberOfSubcribers}}
                     </v-col>
                     <v-col cols="2">
-                      <p>{{ formatCurrency(lc.giaKhoaHocThucTe) }} </p>
-                      <p class="price-table">{{ formatCurrency(lc.giaKhoaHoc) }}</p>
+                      <p>{{ formatCurrency(lc.price) }} </p>
+                      <p class="price-table">{{ formatCurrency(lc.price) }}</p>
                     </v-col>
                   </v-row>
                   <hr />
@@ -218,12 +213,7 @@
                 <div class="teacher-profile">
                   <h3 class="my-4">Giảng viên</h3>
                   <h4 class="name-teacher">
-                    <router-link
-                      :to="`/user-teacher-profile/${this.userId}`"
-                      @click="handleRouterUserClick(this.userId)"
-                    >
-                      {{ this.user }}</router-link
-                    >
+                      {{ listCourseApi.creatorName }}
                   </h4>
                   <h5 class="nick-name-teacher">
                     <!-- {{ t.nickName }} -->
@@ -232,7 +222,7 @@
                     <v-row>
                       <v-col cols="2">
                         <v-avatar
-                          :image="this.anhDaiDien"
+                          :image="listCourseApi.avatarUser"
                           size="130"
                           class="my-6"
                         ></v-avatar>
@@ -255,7 +245,7 @@
                                 icon="fa-solid fa-user-group"
                               ></font-awesome-icon>
                               <!-- gắn học viên vào đây -->
-                              {{this.listCourseApi.soHocVienHocKhoaHoc}}
+                              {{this.listCourseApi.numberOfSubcribers}}
                               <span>học viên</span>
                             </v-title>
                           </div>
@@ -903,7 +893,7 @@ export default {
             "https://www.youtube.com/embed/9kohr6pMwag?list=PL33lvabfss1wUj15ea6W0A-TtDOrWWSRK",
         },
       ],
-      listCourseApi: [],
+      listCourseApi: {},
       courseContent: [],
       lessonsInDesiredChapter: [],
       timer: [
@@ -1015,27 +1005,29 @@ export default {
     const id = this.$route.params.id;
     try {
       const res = await this.courseApi.getCourseId(id);
-      this.courseContent = res.data.chuongHocs;
+      console.log(res);
+      const result = res.dataResponseCourse
+      
+      this.courseContent = result.dataResponseChapters;
       console.log(this.courseContent);
     } catch (e) {
       console.error("Error fetching course:", e);
     }
     try {
       const response = await this.courseApi.getAllCourses();
-      this.listCourePropose = response;
+      console.log(response);
+      this.listCourePropose = response.dataResponseCourse;
       console.log(this.listCourePropose);
     } catch (e) {
       console.error("Error fetching course:", e);
     }
     try {
       const res = await this.courseApi.getCourseId(id);
-      this.listCourseApi = res.data;
-      const user = this.listCourseApi.nguoiTao;
-      this.user = user.hoVaTen;
-      const anhDaiDien = this.listCourseApi.nguoiTao;
-      this.anhDaiDien = anhDaiDien.anhDaiDien;
-      const userId = this.listCourseApi.nguoiTao;
-      this.userId = userId.id;
+      console.log(res);
+      this.listCourseApi = res.dataResponseCourse;
+      const user = this.listCourseApi.creatorName;
+      console.log(this.listCourseApi)
+      const anhDaiDien = this.listCourseApi.creatorName;
       const list = this.listCourseApi;
       console.log(list);
     } catch (e) {
@@ -1043,11 +1035,11 @@ export default {
     }
     try {
       const res = await this.courseApi.getCourseId(id);
-      this.listLesson = res.data.chuongHocs;
+      this.listLesson = res.data.dataResponseChapters;
       for (let i = 0; i < this.listLesson.length; i++) {
         const chapter = this.listLesson[i];
         console.log("Chương ", i, ":", chapter);
-        const lessonArray = chapter.baiHocs;
+        const lessonArray = chapter.lessons;
         console.log("Bài học trong chương ", i, ":", lessonArray);
         for (var j = 0; j < lessonArray.length; j++) {
           if (lessonArray[j] != null) {

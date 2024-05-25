@@ -1,8 +1,6 @@
-import axios from "axios";
+import axiosIns from "../../plugins/axios";
 import { defineStore } from "pinia";
 
-// Định nghĩa baseURL cho axios
-axios.defaults.baseURL = "https://localhost:7046/api";
 const authorization = localStorage.getItem("accessToken")
   ? localStorage.getItem("accessToken")
   : "";
@@ -10,9 +8,9 @@ export const courseApi = defineStore("course", {
   actions: {
     createCourse(params) {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .post(
-            "/user/ThemKhoaHoc",
+            "/Admin/CreateCourse",
             { ...params },
             {
               headers: {
@@ -28,9 +26,9 @@ export const courseApi = defineStore("course", {
     updateCourse(params) {
       return new Promise((resolve, reject) => {
         // Đối với hàm updateCourse, bạn cần truyền ID của khóa học cần cập nhật
-        axios
+        axiosIns
           .put(
-            "/user/SuaThongTinKhoaHoc/",
+            "/User/UpdateCourse/",
             { ...params },
             {
               headers: {
@@ -45,16 +43,16 @@ export const courseApi = defineStore("course", {
     },
     searchCourses(params) {
       return new Promise((resolve, reject) => {
-        axios
-          .get("/user/getkhoahoc", { ...params })
+        axiosIns
+          .get("/User/GetAllCourse", { ...params })
           .then((res) => resolve(res))
           .catch((error) => reject(error));
       });
     },
     getAllCourses() {
       return new Promise((resolve, reject) => {
-        axios
-          .get("/user/getkhoahoc")
+        axiosIns
+          .get("/User/GetAllCourse")
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data);
@@ -67,8 +65,8 @@ export const courseApi = defineStore("course", {
     },
     getAllCoursesByUserId(id) {
       return new Promise((resolve, reject) => {
-        axios
-          .get(`/user/GetAllKhoaHocTheoNguoiTao/${id}`)
+        axiosIns
+          .get(`/User/GetCourseByUserId/${id}`)
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data);
@@ -82,8 +80,8 @@ export const courseApi = defineStore("course", {
     },
     deleteCourses(khoaHocId) {
       return new Promise((resolve, reject) => {
-        axios
-          .delete(`/user/XoaKhoaHoc/${khoaHocId}`, {
+        axiosIns
+          .delete(`/User/DeleteCourse/${khoaHocId}`, {
             headers: {
               Authorization: `Bearer ${authorization}`,
             },
@@ -101,8 +99,8 @@ export const courseApi = defineStore("course", {
     },
     getCourseId(id) {
       return new Promise((resolve, reject) => {
-        axios
-          .get(`/user/GetKhoaHocById/${id}`)
+        axiosIns
+          .get(`/User/GetCourseById/${id}`)
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data);
@@ -115,7 +113,7 @@ export const courseApi = defineStore("course", {
     },
     getAllCoursesType() {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .get("/user/GetAllLKH")
           .then((res) => {
             if (res.status === 200) {
