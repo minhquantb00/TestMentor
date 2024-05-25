@@ -73,7 +73,7 @@ namespace TestMentor.Infrastructure.ImplementRepository
                 }
                 else
                 {
-                    var roleItem = await _context.Roles.SingleOrDefaultAsync(x => x.Code.Equals(role));
+                    var roleItem = await _context.Roles.SingleOrDefaultAsync(x => x.Code.ToLower().Equals(role.ToLower()));
                     if (roleItem == null)
                     {
                         throw new ArgumentNullException("Không có quyền này");

@@ -1,11 +1,24 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SixLabors.ImageSharp;
 using System.Text;
+using TestMentor.Application.Handle.HandleEmail;
+using TestMentor.Application.ImplementService;
+using TestMentor.Application.InterfaceService;
+using TestMentor.Application.UseCases.User_UseCase.LoginUser;
+using TestMentor.Application.UseCases.User_UseCase.RegisterUser;
+using TestMentor.Application.UseCases;
+using TestMentor.Domain.Entities;
+using TestMentor.Domain.InterfaceRepository;
 using TestMentor.Infrastructure.DataContext;
+using TestMentor.Infrastructure.ImplementRepository;
+using TestMentor.Application.UseCases.User_UseCase.AuthenticateUser;
+using TestMentor.Application.UseCases.User_UseCase.GetUserById;
+using TestMentor.Application.UseCases.User_UseCase.DataUser;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,9 +37,30 @@ builder.Services.AddCors(options =>
     });
 });
 
+#region Register IUseCase
+builder.Services.AddScoped<IUseCase<RegisterUserUseCaseInput, RegisterUserUseCaseOutput>, RegisterUserUseCase>();
+builder.Services.AddScoped<IUseCase<LoginUserUseCaseInput, LoginUserUseCaseOutput>, LoginUserUseCase>();
+builder.Services.AddScoped<IUseCase<AuthenticateUserUseCaseInput, AuthenticateUserUseCaseOutput>, AuthenticateUserUseCase>();
+builder.Services.AddScoped<IUseCaseGetById<int, GetUserByIdUseCaseOutput>, GetUserByIdUseCase>();
+#endregion
+
+#region Register Repository
 builder.Services.AddScoped<IDbContext, AppDbContext>();
+builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<IRepository<Permission>, Repository<Permission>>();
+builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
+builder.Services.AddScoped<IRepository<RefreshToken>, Repository<RefreshToken>>();
+builder.Services.AddScoped<IRepository<ConfirmEmail>, Repository<ConfirmEmail>>();
+#endregion
 
+#region Đăng ký service
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IEmailService, EmailService>();
+#endregion
 
+#region Register Mapper
+builder.Services.AddScoped<UserConverter>();
+#endregion
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
@@ -60,7 +94,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

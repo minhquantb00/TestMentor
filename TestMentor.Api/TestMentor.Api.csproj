@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TestMentor.Application\TestMentor.Application.csproj" />
     <ProjectReference Include="..\TestMentor.Domain\TestMentor.Domain.csproj" />
     <ProjectReference Include="..\TestMentor.Infrastructure\TestMentor.Infrastructure.csproj" />
