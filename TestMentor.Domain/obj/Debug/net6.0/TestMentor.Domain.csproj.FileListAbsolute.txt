@@ -1,0 +1,11 @@
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\bin\Debug\net6.0\TestMentor.Domain.deps.json
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\bin\Debug\net6.0\TestMentor.Domain.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\bin\Debug\net6.0\TestMentor.Domain.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\TestMentor.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\TestMentor.Domain.AssemblyInfoInputs.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\TestMentor.Domain.AssemblyInfo.cs
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\TestMentor.Domain.csproj.CoreCompileInputs.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\TestMentor.Domain.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\refint\TestMentor.Domain.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\TestMentor.Domain.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Domain\obj\Debug\net6.0\ref\TestMentor.Domain.dll

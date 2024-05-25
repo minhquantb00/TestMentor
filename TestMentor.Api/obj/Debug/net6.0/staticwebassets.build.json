@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "8AyTZA7AvscMuWoqTBMhx1o8719fmKde0nf/8qX/eYc=",
+  "Source": "TestMentor.Api",
+  "BasePath": "_content/TestMentor.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

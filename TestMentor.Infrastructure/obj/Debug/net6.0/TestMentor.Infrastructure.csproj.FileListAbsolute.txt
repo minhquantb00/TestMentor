@@ -1,0 +1,17 @@
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\bin\Debug\net6.0\TestMentor.Infrastructure.deps.json
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\bin\Debug\net6.0\TestMentor.Infrastructure.runtimeconfig.json
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\bin\Debug\net6.0\TestMentor.Infrastructure.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\bin\Debug\net6.0\TestMentor.Infrastructure.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\bin\Debug\net6.0\TestMentor.Domain.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\bin\Debug\net6.0\TestMentor.Domain.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.csproj.AssemblyReference.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.AssemblyInfoInputs.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.AssemblyInfo.cs
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.csproj.CoreCompileInputs.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.csproj.CopyComplete
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\refint\TestMentor.Infrastructure.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\TestMentor.Infrastructure.genruntimeconfig.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Infrastructure\obj\Debug\net6.0\ref\TestMentor.Infrastructure.dll

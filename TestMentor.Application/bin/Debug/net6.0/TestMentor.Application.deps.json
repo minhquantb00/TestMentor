@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TestMentor.Application/1.0.0": {
+        "dependencies": {
+          "TestMentor.Domain": "1.0.0"
+        },
+        "runtime": {
+          "TestMentor.Application.dll": {}
+        }
+      },
+      "TestMentor.Domain/1.0.0": {
+        "runtime": {
+          "TestMentor.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TestMentor.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TestMentor.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

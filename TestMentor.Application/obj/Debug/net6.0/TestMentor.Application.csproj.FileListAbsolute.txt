@@ -1,0 +1,15 @@
+D:\ProjectCSharp\TestMentor\TestMentor.Application\bin\Debug\net6.0\TestMentor.Application.deps.json
+D:\ProjectCSharp\TestMentor\TestMentor.Application\bin\Debug\net6.0\TestMentor.Application.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Application\bin\Debug\net6.0\TestMentor.Application.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Application\bin\Debug\net6.0\TestMentor.Domain.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Application\bin\Debug\net6.0\TestMentor.Domain.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.csproj.AssemblyReference.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.AssemblyInfoInputs.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.AssemblyInfo.cs
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.csproj.CoreCompileInputs.cache
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.csproj.CopyComplete
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\refint\TestMentor.Application.dll
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\TestMentor.Application.pdb
+D:\ProjectCSharp\TestMentor\TestMentor.Application\obj\Debug\net6.0\ref\TestMentor.Application.dll
