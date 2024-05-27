@@ -10,8 +10,8 @@
       >
         <v-carousel-item
           v-for="b in listBanner"
-          :key="b"
-          :src="b.anhBanner"
+          :key="b.id"
+          :src="b.imageUrl"
           cover
         ></v-carousel-item>
       </v-carousel>
@@ -147,7 +147,7 @@
                   <v-img height="200" :src="n.image" cover></v-img>
 
                   <v-card-title class="text-h5">{{
-                    n.tieuDeKhoaHoc
+                    n.title
                   }}</v-card-title>
 
                   <v-card-subtitle>
@@ -279,7 +279,7 @@ export default {
     }
     try {
       const result = await this.bannerApi.getAllBanner();
-      this.listBanner = result;
+      this.listBanner = result.dataResponseBanner;
     } catch (e) {
       console.error("Fetching faild", e);
     }

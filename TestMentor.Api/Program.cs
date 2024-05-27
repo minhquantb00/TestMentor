@@ -31,6 +31,9 @@ using TestMentor.Application.UseCases.Chapter_UseCase.DataChapter;
 using TestMentor.Application.UseCases.Lesson_UseCase.DataLesson;
 using TestMentor.Application.UseCases.Lesson_UseCase.CreateLesson;
 using TestMentor.Application.UseCases.Chapter_UseCase.GetChapterById;
+using TestMentor.Application.UseCases.Banner_UseCase.CreateBanner;
+using TestMentor.Application.UseCases.Banner_UseCase.GetBanner;
+using TestMentor.Application.UseCases.User_UseCase.GetUser;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +66,9 @@ builder.Services.AddScoped<IUseCase<UpdateCourseUseCaseInput, UpdateCourseUseCas
 builder.Services.AddScoped<IUseCase<CreateChapterUseCaseInput, CreateChapterUseCaseOutput>, CreaterChapterUseCase>();
 builder.Services.AddScoped<IUseCase<CreateLessonUseCaseInput, CreateLessonUseCaseOutput>, CreateLessonUseCase>();
 builder.Services.AddScoped<IUseCaseGetById<int, GetChapterByIdUseCaseOutput>, GetChapterByIdUseCase>();
+builder.Services.AddScoped<IUseCase<CreateBannerUseCaseInput, CreateBannerUseCaseOutput>, CreateBannerUseCase>();
+builder.Services.AddScoped<IUseCase<GetBannerUseCaseInput, GetBannerUseCaseOutput>, GetBannerUseCase>();
+builder.Services.AddScoped<IUseCase<GetUserUseCaseInput, GetUserUseCaseOutput>, GetUserUseCase>();
 #endregion
 
 #region Register Repository
@@ -76,6 +82,7 @@ builder.Services.AddScoped<IRepository<Course>, Repository<Course>>();
 builder.Services.AddScoped<IRepository<ChapterStudy>, Repository<ChapterStudy>>();
 builder.Services.AddScoped<IRepository<Lesson>, Repository<Lesson>>();
 builder.Services.AddScoped<IRepository<ChapterStudy>, Repository<ChapterStudy>>();
+builder.Services.AddScoped<IRepository<Banner>, Repository<Banner>>();
 #endregion
 
 #region Đăng ký service

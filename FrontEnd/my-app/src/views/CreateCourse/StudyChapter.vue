@@ -219,16 +219,11 @@ export default {
     };
   },
   async mounted() {
-    console.log('vao day chua');
     const id = this.$route.params.id;
     try {
       const res = await this.courseApi.getCourseId(id);
-      console.log(res)
       const result = res.dataResponseCourse;
-      console.log(result)
       this.listCourse = result.dataResponseChapters;
-      console.log("đây là chương học");
-      console.log(this.listCourse);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

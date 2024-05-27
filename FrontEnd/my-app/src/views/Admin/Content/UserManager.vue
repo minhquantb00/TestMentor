@@ -5,19 +5,14 @@
         <th class="text-left">Tên người dùng</th>
         <th class="text-left">Số điện thoại</th>
         <th class="text-left">Email</th>
-        <th class="text-left">Số lần vi phạm</th>
-        <th class="text-left">Trạng thái người dùng</th>
         <th class="text-left">Thao tác</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in listUser" :key="item">
-        <td>{{ item.hoVaTen }}</td>
-        <td>{{ item.soDienThoai }}</td>
+      <tr v-for="item in listUser" :key="item.id">
+        <td>{{ item.fullName }}</td>
+        <td>{{ item.phoneNumber }}</td>
         <td>{{ item.email }}</td>
-        <td>{{ item.email }}</td>
-
-        <td>{{ item.soDienThoai }}</td>
         <td>
           <v-btn icon color="green" size="small" variant="outlined">
             <font-awesome-icon
@@ -43,12 +38,14 @@ export default {
     return{
       userApi: userApi(),
       listUser:[],
+      params:{}
     }
   },
   async mounted() {
     try{
-      const userApi = await this.userApi.getAllUser();
-      this.listUser = userApi
+      const userApi = await this.userApi.getAllUser(this.params);
+      console.log(userApi);
+      this.listUser = userApi.dataResponseUsers
       console.log(this.listUser);
     }catch(e){
       console.error("Error fetching:" + e);

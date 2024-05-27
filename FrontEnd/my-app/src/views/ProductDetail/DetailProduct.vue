@@ -46,7 +46,7 @@
               id="detail-course"
             >
               <v-card class="mx-auto ma-8 fixed-card" max-width="390">
-                
+
                 <iframe
                   v-if="listCourseApi.trailerKhoaHoc"
                   :src="listCourseApi.trailerKhoaHoc"
@@ -1007,7 +1007,7 @@ export default {
       const res = await this.courseApi.getCourseId(id);
       console.log(res);
       const result = res.dataResponseCourse
-      
+
       this.courseContent = result.dataResponseChapters;
       console.log(this.courseContent);
     } catch (e) {
@@ -1035,7 +1035,8 @@ export default {
     }
     try {
       const res = await this.courseApi.getCourseId(id);
-      this.listLesson = res.data.dataResponseChapters;
+      const result = res.dataResponseCourse
+      this.listLesson = result.dataResponseChapters;
       for (let i = 0; i < this.listLesson.length; i++) {
         const chapter = this.listLesson[i];
         console.log("Chương ", i, ":", chapter);

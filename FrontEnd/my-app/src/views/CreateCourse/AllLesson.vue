@@ -108,7 +108,6 @@
               <tr>
                 <th class="text-left">Tên bài học</th>
                 <th class="text-left">Thời gian tạo</th>
-                <th class="text-left">Thời gian cập nhật</th>
                 <th class="text-left">Thời lượng video</th>
                 <th class="text-left">Thao tác</th>
               </tr>
@@ -117,7 +116,7 @@
               <tr v-for="item in listLessons" :key="item.id">
                 <td>{{ item.lessonName }}</td>
                 <td>{{ formatDate(item.createTime) }}</td>
-                <td>{{ item.thoiLuongVideo }}</td>
+                <td>{{ item.videoDuration }}</td>
                 <td class="mt-4">
                   <router-link to="#">
                     <v-btn
@@ -149,9 +148,18 @@
                               <span class="obligatory mr-2">*</span>
                               Thời lượng video
                             </label>
+                            <v-text-field
+                              class="mt-3"
+                              v-model="videoDuration"
+                              color="purple-accent-4"
+                              variant="outlined"
+                              placeholder="Thời lượng video"
+                            >
+                            </v-text-field>
                             <v-lable class="mb-3">Mô tả</v-lable>
                             <ckeditor
                               :editor="editor"
+                              s
                               v-model="description"
                               :config="editorConfig"
                               aria-placeholder="Mô tả"
@@ -220,6 +228,7 @@ export default {
     lessonsApi: lessonsApi(),
     studyChapter: studyChapter(),
     search: "",
+
     listLessons: [],
   }),
   async mounted() {
@@ -227,8 +236,8 @@ export default {
     try {
       const res = await this.studyChapter.getStudyChapterById(id);
       console.log(res);
-      this.listLessons = res.dataResponseChapter;
-      console.log(this.listLessons);
+      const chapter = res.dataResponseChapter;
+      this.listLessons = chapter.lessons;
     } catch (e) {
       console.error("Error Fetching Lessons" + e.message);
     }

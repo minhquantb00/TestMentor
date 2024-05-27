@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestMentor.Application.ApplicationConstant;
 using TestMentor.Application.UseCases;
+using TestMentor.Application.UseCases.Banner_UseCase.CreateBanner;
 using TestMentor.Application.UseCases.Course_UseCase.CreateCourse;
 
 namespace TestMentor.Api.Controllers
@@ -23,6 +24,19 @@ namespace TestMentor.Api.Controllers
         public async Task<IActionResult> CreateCourse([FromForm] CreateCourseUseCaseInput input)
         {
             var useCase = _serviceProvider.GetService<IUseCase<CreateCourseUseCaseInput, CreateCourseUseCaseOuput>>();
+            var result = await useCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Consumes(contentType: "multipart/form-data")]
+        public async Task<IActionResult> CreateBanner([FromForm] CreateBannerUseCaseInput input)
+        {
+            var useCase = _serviceProvider.GetService<IUseCase<CreateBannerUseCaseInput, CreateBannerUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(input);
             if (!result.Succeeded)
             {

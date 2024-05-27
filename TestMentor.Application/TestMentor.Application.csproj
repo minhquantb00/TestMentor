@@ -23,4 +23,10 @@
     <ProjectReference Include="..\TestMentor.Domain\TestMentor.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Banner_UseCase\DeleteBanner\" />
+    <Folder Include="UseCases\Banner_UseCase\GetBannerById\" />
+    <Folder Include="UseCases\Banner_UseCase\UpdateBanner\" />
+  </ItemGroup>
+
 </Project>

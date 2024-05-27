@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestMentor.Application.ApplicationConstant;
 using TestMentor.Application.UseCases;
+using TestMentor.Application.UseCases.Banner_UseCase.GetBanner;
 using TestMentor.Application.UseCases.Chapter_UseCase.CreateChapter;
 using TestMentor.Application.UseCases.Chapter_UseCase.GetChapterById;
 using TestMentor.Application.UseCases.Course_UseCase.DeleteCourse;
@@ -12,6 +13,7 @@ using TestMentor.Application.UseCases.Course_UseCase.GetCourseByUserId;
 using TestMentor.Application.UseCases.Course_UseCase.GetCouseById;
 using TestMentor.Application.UseCases.Course_UseCase.UpdateCourse;
 using TestMentor.Application.UseCases.Lesson_UseCase.CreateLesson;
+using TestMentor.Application.UseCases.User_UseCase.GetUser;
 
 namespace TestMentor.Api.Controllers
 {
@@ -117,6 +119,28 @@ namespace TestMentor.Api.Controllers
         {
             var useCase = _serviceProvider.GetService<IUseCaseGetById<int, GetChapterByIdUseCaseOutput>>();
             var result = await useCase.ExcuteAsync(id);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllBanners([FromQuery] GetBannerUseCaseInput input)
+        {
+            var useCase = _serviceProvider.GetService<IUseCase<GetBannerUseCaseInput, GetBannerUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(input);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers([FromQuery] GetUserUseCaseInput input)
+        {
+            var useCase = _serviceProvider.GetService<IUseCase<GetUserUseCaseInput, GetUserUseCaseOutput>>();
+            var result = await useCase.ExcuteAsync(input);
             if (!result.Succeeded)
             {
                 return BadRequest(result);

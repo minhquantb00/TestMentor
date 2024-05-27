@@ -1,8 +1,7 @@
-import axios from "axios";
+import axiosIns from "../../plugins/axios";
 import { defineStore } from "pinia";
 
-// Định nghĩa baseURL cho axios
-axios.defaults.baseURL = "https://localhost:7046/api";
+
 const authorization = localStorage.getItem("accessToken")
   ? localStorage.getItem("accessToken")
   : "";
@@ -10,9 +9,9 @@ export const bannerApi = defineStore("banner", {
   actions: {
     createBanner(params) {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .post(
-            "/admin/TaoBanner",
+            "/Admin/CreateBanner",
             { ...params },
             {
               headers: {
@@ -27,7 +26,7 @@ export const bannerApi = defineStore("banner", {
     },
     deleteBanner(id) {
       return new Promise((resolve, reject) => {
-        axios
+        axiosIns
           .delete(`/user/XoaBanner/${id}`, {
             headers: {
               Authorization: `Bearer ${authorization}`,
@@ -46,8 +45,8 @@ export const bannerApi = defineStore("banner", {
     },
     getAllBanner() {
       return new Promise((resolve, reject) => {
-        axios
-          .get("/user/GetAllsBanner")
+        axiosIns
+          .get("/User/GetAllBanners")
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data);

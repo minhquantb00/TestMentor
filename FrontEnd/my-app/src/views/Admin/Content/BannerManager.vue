@@ -18,7 +18,7 @@
               <v-file-input
                 label="File input"
                 @change="hanldeImageChange"
-                v-model="inputAddBanner.anhBanner"
+                v-model="inputAddBanner.file"
                 show-size
               ></v-file-input>
             </v-card-text>
@@ -49,7 +49,7 @@
         <v-col cols="4" v-for="card in listBanner" :key="card">
           <v-card>
             <v-img
-              :src="card.anhBanner"
+              :src="card.imageUrl"
               class="align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
@@ -109,9 +109,10 @@ export default {
       page: 1,
       loading:false,
       inputAddBanner: {
-        anhBanner: null,
+        file: null,
       },
       listBanner:[],
+      params: null,
       cards: [
         {
           title: "Pre-fab homes",
@@ -133,13 +134,14 @@ export default {
           src: "https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg",
           flex: 6,
         },
+
       ],
     };
   },
   async mounted() {
    try{
      const res = await this.bannerApi.getAllBanner();
-    this.listBanner = res
+    this.listBanner = res.dataResponseBanner
    }catch(e) {e}
   },
   methods: {
@@ -163,7 +165,7 @@ export default {
         return;
       }
       this.imageFile = fileName;
-      this.inputAddBanner.anhBanner = file;
+      this.inputAddBanner.file = file;
     },
     async addBanner() {
       const result = await this.bannerApi.createBanner(

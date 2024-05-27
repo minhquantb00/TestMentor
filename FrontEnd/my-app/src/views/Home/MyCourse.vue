@@ -30,7 +30,7 @@
                 <v-hover
                   v-slot="{ isHovering, props }"
                   v-for="c in listCourseApi"
-                  :key="c"
+                  :key="c.id"
                 >
                   <router-link :to="`/video-lessons/${c.id}`" style="text-decoration:none;">
                     <v-card
@@ -50,7 +50,7 @@
                         ></v-progress-linear>
                       </template>
 
-                      <v-img :src="c.anhKhoaHoc" height="160" cover>
+                      <v-img :src="c.image" height="160" cover>
                         <div class="hover-image text-center">
                           <v-btn
                             icon="mdi-play"
@@ -63,10 +63,10 @@
                       </v-img>
 
                       <v-card-item>
-                        <v-card-title>{{ c.tieuDeKhoaHoc }}</v-card-title>
+                        <v-card-title>{{ c.title }}</v-card-title>
 
                         <v-card-subtitle>
-                          <span class="me-1">{{ c.nguoiTao.hoVaTen }}</span>
+                          <span class="me-1">{{ c.creatorName }}</span>
                           <v-progress-linear
                             v-model="c.skill"
                             striped
@@ -210,93 +210,13 @@ export default {
       rating: 1,
       courseApi: courseApi(),
       listCourseApi: [],
-      listCourse: [
-        {
-          id: 1,
-          image:
-            "https://tuhoclaptrinh.edu.vn/upload/post/2023/04/19/gioi-thieu-ngon-ngu-c-20230419090719-567750.jpg",
-          nameCourse: "Khóa học C# .Net Core",
-          description: "C# là một ngôn ngữ thuần hướng đối tượng,...",
-          teacher: "Trần Văn Dương",
-          rating: 3,
-          skill: 15,
-          price: "397.000 VNĐ",
-        },
-        {
-          id: 2,
-          image:
-            "https://appmaster.io/api/_files/hRaLG2N4DVjRZJQzCpN2zJ/download/",
-          nameCourse: "Khóa học Java",
-          description:
-            "Java là một ngôn ngữ lập trình thuần hướng đối tượng,...",
-          teacher: "Trần Minh Quân",
-          rating: 3,
-          skill: 55,
-          price: "397.000 VNĐ",
-        },
-        {
-          id: 3,
-          image:
-            "https://code24h.com/pictures/picfullsizes/2018/08/12/vpn1534042332.jpg",
-          nameCourse: "Khóa học Vuejs",
-          description: "Vuejs là một framework của JavaScript,...",
-          teacher: "Trần Văn Dương",
-          rating: 3,
-          skill: 100,
-          price: "397.000 VNĐ",
-        },
-        {
-          id: 4,
-          image:
-            "https://amela.vn/wp-content/uploads/2021/08/reactjs-app-development-500x500-1.jpg",
-          nameCourse: "Khóa học ReactJs",
-          description: "ReacJs là một thư viện JavaScript mã nguồn mở,...",
-          teacher: "Nguyễn Khánh Toàn",
-          rating: 3,
-          skill: 85,
-          price: "397.000 VNĐ",
-        },
-        {
-          id: 5,
-          image:
-            "https://cdn.mcivietnam.com/nhanvien/media/Blog/python-trong-marketingjpegbd2kfe.jpeg",
-          nameCourse: "Khóa học Python",
-          description:
-            "Python là một ngôn ngữ lập trình bậc cao, đa mục đích,...",
-          teacher: "Trần Văn Dương",
-          rating: 3,
-          skill: 25,
-          price: "397.000 VNĐ",
-        },
-      ],
-      icons: ["mdi-play"],
-      items: [
-        {
-          title: "New Releases",
-          text: `It's New Release Friday`,
-          subtext: "Newly released songs.",
-          img: "https://cdn.vuetifyjs.com/docs/images/cards/hands.jpg",
-        },
-        {
-          title: "Rock",
-          text: "Greatest Rock Hits",
-          subtext: "Lose yourself in rock tunes.",
-          img: "https://cdn.vuetifyjs.com/docs/images/cards/singer.jpg",
-        },
-        {
-          title: "Mellow Moods",
-          text: "Ambient Bass",
-          subtext: "Chill beats to mellow you out.",
-          img: "https://cdn.vuetifyjs.com/docs/images/cards/concert.jpg",
-        },
-      ],
-      transparent: "rgba(255, 255, 255, 0)",
+      listCourse: []
     };
   },
   async mounted() {
     try{
       const res = await this.courseApi.getAllCourses()
-      this.listCourseApi = res
+      this.listCourseApi = res.dataResponseCourse
       console.log(this.listCourseApi);
     }catch(e){
       console.error('Error fetching' + e.message);

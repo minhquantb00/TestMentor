@@ -110,7 +110,7 @@
         <div class="video-lessons">
           <div class="video" v-if="selectedLesson">
             <iframe
-              :src="selectedLesson ? selectedLesson.videoBaiHoc : ''"
+              :src="selectedLesson ? selectedLesson.linkVideo : ''"
               width="100%"
               height="100%"
               frameborder="0"
@@ -134,7 +134,7 @@
                       <div class="content-course-introduction ml-4">
                         <h4>Giới thiệu khóa học</h4>
                         <p class="mt-6 mb-4 text-data">
-                          {{ this.listCourse.tieuDeKhoaHoc }}
+                          {{ this.listCourse.title }}
                         </p>
                       </div>
                       <hr />
@@ -146,7 +146,7 @@
                           <v-col cols="3">
                             <p class="text-data ml-4 mt-3">
                               Học viên:
-                              {{ this.listCourse.soHocVienHocKhoaHoc }}
+                              {{ this.listCourse.numberOfSubcribers }}
                               <font-awesome-icon
                                 icon="fa-solid fa-user-group"
                               ></font-awesome-icon>
@@ -161,7 +161,7 @@
                             </p>
                             <p class="text-data">
                               Video: Tổng số
-                              {{ this.listCourse.tongThoiGianKhoaHoc }} giờ
+                              {{ this.listCourse.totalDuration }} giờ
                             </p>
                           </v-col>
                         </v-row>
@@ -179,7 +179,7 @@
                                 :key="n"
                                 :class="n === +content + 1 && 'mb-0'"
                                 class="text-data"
-                                v-html="this.listCourse.moTaKhoaHoc"
+                                v-html="this.listCourse.description"
                               ></p>
                             </v-card-text>
                           </v-col>
@@ -274,11 +274,11 @@
               <v-expansion-panel
                 v-for="(l, index) in listStudyChapter"
                 :key="index"
-                :title="l.tenChuong"
+                :title="l.name"
                 :value="l.id"
               >
                 <v-expansion-panel-text
-                  v-for="(c, lessonIndex) in l.baiHocs"
+                  v-for="(c, lessonIndex) in l.lessons"
                   :key="lessonIndex"
                 >
                   <v-row>
@@ -291,7 +291,7 @@
                         icon="fa-solid fa-tv"
                         class="mr-3"
                       ></font-awesome-icon>
-                      {{ c.tenBaiHoc }}
+                      {{ c.lessonName }}
                     </v-col>
                     <v-col cols="4">
                       <div v-if="c.resources == false">
@@ -399,20 +399,7 @@ export default {
       content: false,
       card1: 0,
       card2: 0,
-      listCourse: [
-        {
-          id: 1,
-          image:
-            "https://tuhoclaptrinh.edu.vn/upload/post/2023/04/19/gioi-thieu-ngon-ngu-c-20230419090719-567750.jpg",
-          nameCourse: "Khóa học C# .Net Core",
-          dateStart: "28/09/2022",
-          student: 3353,
-          course: 67,
-          time: 70,
-          price: 443.992,
-          stock: false,
-        },
-      ],
+      listCourse: [],
       listStudyChapter: [],
       numberLesson: [],
       lessonsInDesiredChapter: [],
@@ -424,32 +411,29 @@ export default {
     const id = this.$route.params.id;
     try {
       const res = await this.courseApi.getCourseId(id);
-      (this.listCourse = res.data), console.log(this.listStudyChapter);
+      this.listCourse = res.DataResponseCourse
     } catch (e) {
       console.error("Error fetching course" + e.message);
     }
     try {
       const res = await this.courseApi.getCourseId(id);
-      (this.listStudyChapter = res.data.chuongHocs),
-        console.log(this.listStudyChapter);
+      const result = res.DataResponseCourse
+      this.listStudyChapter = result.DataResponseChapters
     } catch (e) {
       console.error("Error fetching course" + e.message);
     }
     try {
       const res = await this.courseApi.getCourseId(id);
-      this.listLessons = res.data.chuongHocs;
+      const result = res.DataResponseCourse
+      this.listLessons = result.DataResponseChapters;
       for (let i = 0; i < this.listLessons.length; i++) {
         const chapter = this.listLessons[i];
         console.log("Chương ", i, ":", chapter);
-        const lessonArray = chapter.baiHocs;
+        const lessonArray = chapter.lessons;
         console.log("Bài học trong chương ", i, ":", lessonArray);
         for (var j = 0; j < lessonArray.length; j++) {
           if (lessonArray[j] != null) {
-            console.log("nó đã vòa đây rồi");
-            console.log(lessonArray[j]);
             this.lessonsInDesiredChapter.push(lessonArray[j]);
-            console.log("đây nhé");
-            console.log(this.lessonsInDesiredChapter);
             this.numberLesson = this.lessonsInDesiredChapter;
           }
         }

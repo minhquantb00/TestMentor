@@ -25,7 +25,7 @@
                             Tổng học viên
                           </v-titlte>
                           <h4>
-                            {{ this.listCourePropose.soHocVienHocKhoaHoc }}
+                            {{ this.listCourePropose.numberOfCompleted }}
                           </h4>
                         </v-col>
                         <v-col cols="4">
@@ -207,7 +207,7 @@
                 ></v-avatar>
               </v-sheet>
               <v-sheet>
-                <a :href="this.teacherProfile.hoVaTen" class="link-teacher">
+                <a :href="listCourePropose.creatorName" class="link-teacher">
                   <v-card
                     class="text-h6 text-center rounded-pill"
                     color="white"
@@ -225,7 +225,7 @@
                     <span style="color: black">Instagram</span>
                   </v-card>
                 </a>
-                <a :href="this.teacherProfile.hoVaTen" class="link-teacher">
+                <a :href="listCourePropose.creatorName" class="link-teacher">
                   <v-card
                     class="text-h6 text-center rounded-pill"
                     color="white"
@@ -241,7 +241,7 @@
                     <span style="color: black">Facebook</span>
                   </v-card>
                 </a>
-                <a :href="this.teacherProfile.hoVaTen" class="link-teacher">
+                <a :href="listCourePropose.creatorName" class="link-teacher">
                   <v-card
                     with="70"
                     :disabled="loading"
@@ -290,16 +290,16 @@
                           ></v-progress-linear>
                         </template>
 
-                        <v-img height="189" :src="e.anhKhoaHoc" cover></v-img>
+                        <v-img height="189" :src="e.image" cover></v-img>
 
                         <v-card-item>
                           <v-card-title style="font-size: 17px">{{
-                            e.tieuDeKhoaHoc
+                            e.title
                           }}</v-card-title>
 
                           <v-card-subtitle>
                             <span class="me-3"
-                              >{{ e.chuongHocs.length }} chương * Tất cả trình
+                              >{{ e.dataResponseChapters.length }} chương * Tất cả trình
                               độ</span
                             >
 
@@ -322,7 +322,7 @@
                           </v-row>
 
                           <div style="margin-top: 30px" class="text-subtitle-2">
-                            <h5>{{ formatCurrency(e.giaKhoaHoc) }}</h5>
+                            <h5>{{ formatCurrency(e.price) }}</h5>
                           </div>
                         </v-card-text>
                       </v-card>
@@ -590,7 +590,7 @@ export default {
     try {
       const res = await this.courseApi.getAllCoursesByUserId(id);
       console.log(res);
-      this.listCourePropose = res;
+      this.listCourePropose = res.dataResponseCourses;
       console.log(this.listCourePropose);
     } catch (e) {
       console.error("Error fetching failed" + e.message);
@@ -605,7 +605,7 @@ export default {
     try {
       const userId = id;
       const res = await this.postApi.getAllPostUserId(userId);
-      this.listPost = res;
+      this.listPost = res.dataResponseCourses;
       console.log(this.listPost);
     } catch (e) {
       console.error("Error fetching failed" + e.message);
